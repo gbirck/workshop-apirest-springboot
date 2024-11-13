@@ -7,7 +7,8 @@ import com.park.demo_park_api.web.dto.UserResponseDTO;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 
-import javax.swing.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserMapper {
 
@@ -26,6 +27,10 @@ public class UserMapper {
         ModelMapper mapper = new ModelMapper();
         mapper.addMappings(props);
         return mapper.map(user, UserResponseDTO.class);
+    }
+
+    public static List<UserResponseDTO> toListDTO(List<User> users) {
+        return users.stream().map(user -> toDTO(user)).collect(Collectors.toList());
     }
 
 }
