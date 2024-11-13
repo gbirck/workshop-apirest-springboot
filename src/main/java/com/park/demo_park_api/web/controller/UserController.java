@@ -2,7 +2,9 @@ package com.park.demo_park_api.web.controller;
 
 import com.park.demo_park_api.entities.User;
 import com.park.demo_park_api.services.UserService;
-import lombok.Getter;
+import com.park.demo_park_api.web.dto.UserCreateDTO;
+import com.park.demo_park_api.web.dto.UserResponseDTO;
+import com.park.demo_park_api.web.dto.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +20,9 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> insert(@RequestBody User user) {
-        User userTest = userService.insert(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userTest);
+    public ResponseEntity<UserResponseDTO> insert(@RequestBody UserCreateDTO userDTO) {
+        User userTest = userService.insert(UserMapper.toUser(userDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.toDTO(userTest));
     }
 
     @GetMapping("/{id}")
@@ -36,8 +38,9 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<User> updatePassword(@PathVariable Long id, @RequestBody User user) {
-        User userTest = userService.updatePassword(id, user.getPassword());
+    public ResponseEntity<User> updatePassword(@PathVariable Long id, @RequestBody UserCreateDTO userDTO) {
+        User userTest = userService.updatePassword(id, userDTO.getPassword());
         return ResponseEntity.ok(userTest);
     }
+
 }
