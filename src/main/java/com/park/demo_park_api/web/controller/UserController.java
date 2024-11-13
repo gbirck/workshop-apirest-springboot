@@ -3,6 +3,7 @@ package com.park.demo_park_api.web.controller;
 import com.park.demo_park_api.entities.User;
 import com.park.demo_park_api.services.UserService;
 import com.park.demo_park_api.web.dto.UserCreateDTO;
+import com.park.demo_park_api.web.dto.UserPasswordDTO;
 import com.park.demo_park_api.web.dto.UserResponseDTO;
 import com.park.demo_park_api.web.dto.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +27,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
+    public ResponseEntity<UserResponseDTO> findById(@PathVariable Long id) {
         User userTest = userService.findById(id);
-        return ResponseEntity.ok(userTest);
+        return ResponseEntity.ok(UserMapper.toDTO(userTest));
     }
 
     @GetMapping
@@ -38,9 +39,9 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<User> updatePassword(@PathVariable Long id, @RequestBody UserCreateDTO userDTO) {
-        User userTest = userService.updatePassword(id, userDTO.getPassword());
-        return ResponseEntity.ok(userTest);
+    public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody UserPasswordDTO passwordDTO) {
+        userService.updatePassword(id, passwordDTO.getCurrentPassword(), passwordDTO.getNewPassword(), passwordDTO.getConfirmPassword());
+        return ResponseEntity.noContent().build();
     }
 
 }
