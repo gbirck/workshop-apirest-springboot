@@ -56,12 +56,28 @@ public class UserController {
         return ResponseEntity.ok(UserMapper.toDTO(userTest));
     }
 
+    @Operation(summary = "Search all users", description = "Resource to search all users",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Resource search completed successfully",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class))),
+                    @ApiResponse(responseCode = "404", description = "Resource not found",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
+            })
     @GetMapping
     public ResponseEntity<List<UserResponseDTO>> findAll() {
         List<User> users = userService.findAll();
         return ResponseEntity.ok(UserMapper.toListDTO(users));
     }
 
+    @Operation(summary = "Update password", description = "Resource to update password",
+            responses = {
+                    @ApiResponse(responseCode = "204", description = "Password updated successfully",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Void.class))),
+                    @ApiResponse(responseCode = "400", description = "Password does not match",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
+                    @ApiResponse(responseCode = "404", description = "Resource not found",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
+            })
     @PatchMapping("/{id}")
     public ResponseEntity<Void> updatePassword(@PathVariable Long id, @Valid @RequestBody UserPasswordDTO passwordDTO) {
         userService.updatePassword(id, passwordDTO.getCurrentPassword(), passwordDTO.getNewPassword(), passwordDTO.getConfirmPassword());

@@ -1,6 +1,5 @@
 package com.park.demo_park_api.web.dto.mapper;
 
-import com.fasterxml.jackson.databind.PropertyName;
 import com.park.demo_park_api.entities.User;
 import com.park.demo_park_api.web.dto.UserCreateDTO;
 import com.park.demo_park_api.web.dto.UserResponseDTO;
