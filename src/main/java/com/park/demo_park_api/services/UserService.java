@@ -1,6 +1,7 @@
 package com.park.demo_park_api.services;
 
 import com.park.demo_park_api.entities.User;
+import com.park.demo_park_api.exception.EntityNotFoundException;
 import com.park.demo_park_api.exception.UsernameUniqueViolationException;
 import com.park.demo_park_api.repositories.UserRepository;
 import jakarta.transaction.Transactional;
@@ -29,7 +30,7 @@ public class UserService {
     @Transactional
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("User not found")
+                () -> new EntityNotFoundException(String.format("Usuário id=%s não encontrado", id))
         );
     }
 
