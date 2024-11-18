@@ -9,7 +9,7 @@ import lombok.*;
 public class UserCreateDTO {
 
     @NotBlank
-    @Email(message = "Formato de email invalido", regexp = "^[a-z0-9.+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")
+    @Email(message = "Invalid email format", regexp = "^[a-z0-9.+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")
     private String username;
     @NotBlank
     @Size(min = 6, max = 10)

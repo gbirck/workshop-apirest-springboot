@@ -1,6 +1,7 @@
 package com.park.demo_park_api.web.exception;
 
 import com.park.demo_park_api.exception.EntityNotFoundException;
+import com.park.demo_park_api.exception.PasswordInvalidException;
 import com.park.demo_park_api.exception.UsernameUniqueViolationException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,16 @@ public class ApiExceptionHandler {
               .body(new ErrorMessage(request, HttpStatus.NOT_FOUND, e.getMessage()));
     }
 
+    @ExceptionHandler(PasswordInvalidException.class)
+    public ResponseEntity<ErrorMessage> passwordInvalidException(RuntimeException e, HttpServletRequest request) {
+
+      log.error("Api error: ", e);
+      return ResponseEntity
+              .status(HttpStatus.BAD_REQUEST)
+              .contentType(MediaType.APPLICATION_JSON)
+              .body(new ErrorMessage(request, HttpStatus.BAD_REQUEST, e.getMessage()));
+    }
+
     @ExceptionHandler(UsernameUniqueViolationException.class)
     public ResponseEntity<ErrorMessage> methodArgumentNotValidException(RuntimeException e, HttpServletRequest request) {
 
@@ -45,6 +56,6 @@ public class ApiExceptionHandler {
       return ResponseEntity
               .status(HttpStatus.UNPROCESSABLE_ENTITY)
               .contentType(MediaType.APPLICATION_JSON)
-              .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_ENTITY, "Campos invalidos", result));
+              .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_ENTITY, "Invalid fields", result));
     }
 }

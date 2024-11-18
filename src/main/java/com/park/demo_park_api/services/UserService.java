@@ -2,6 +2,7 @@ package com.park.demo_park_api.services;
 
 import com.park.demo_park_api.entities.User;
 import com.park.demo_park_api.exception.EntityNotFoundException;
+import com.park.demo_park_api.exception.PasswordInvalidException;
 import com.park.demo_park_api.exception.UsernameUniqueViolationException;
 import com.park.demo_park_api.repositories.UserRepository;
 import jakarta.transaction.Transactional;
@@ -23,26 +24,26 @@ public class UserService {
             return userRepository.save(user);
         }
         catch (DataIntegrityViolationException e) {
-            throw new UsernameUniqueViolationException(String.format("Username {%s} ja cadastrado", user.getUsername()));
+            throw new UsernameUniqueViolationException(String.format("Username {%s} already registered", user.getUsername()));
         }
     }
 
     @Transactional
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException(String.format("Usuário id=%s não encontrado", id))
+                () -> new EntityNotFoundException(String.format("User id=%s not found", id))
         );
     }
 
     @Transactional
     public User updatePassword(Long id, String currentPassword, String newPassword, String confirmPassword) {
         if (!newPassword.equals(confirmPassword)) {
-            throw new RuntimeException("Passwords do not match");
+            throw new PasswordInvalidException("Passwords do not match");
         }
 
         User user = findById(id);
         if (!user.getPassword().equals(currentPassword)) {
-            throw new RuntimeException("Passwords do not match");
+            throw new PasswordInvalidException("Wrong current password");
         }
 
         user.setPassword(newPassword);
