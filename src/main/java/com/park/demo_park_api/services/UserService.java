@@ -22,8 +22,7 @@ public class UserService {
     public User insert(User user) {
         try {
             return userRepository.save(user);
-        }
-        catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException e) {
             throw new UsernameUniqueViolationException(String.format("Username {%s} already registered", user.getUsername()));
         }
     }
@@ -33,6 +32,18 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(String.format("User id=%s not found", id))
         );
+    }
+
+    @Transactional
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Username =%s not found", username))
+        );
+    }
+
+    @Transactional
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
     @Transactional
@@ -48,10 +59,5 @@ public class UserService {
 
         user.setPassword(newPassword);
         return user;
-    }
-
-    @Transactional
-    public List<User> findAll() {
-        return userRepository.findAll();
     }
 }

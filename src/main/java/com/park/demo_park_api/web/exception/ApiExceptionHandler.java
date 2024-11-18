@@ -20,31 +20,31 @@ public class ApiExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorMessage> entityNotFoundException(RuntimeException e, HttpServletRequest request) {
 
-      log.error("Api error: ", e);
-      return ResponseEntity
-              .status(HttpStatus.NOT_FOUND)
-              .contentType(MediaType.APPLICATION_JSON)
-              .body(new ErrorMessage(request, HttpStatus.NOT_FOUND, e.getMessage()));
+        log.error("Api error: ", e);
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErrorMessage(request, HttpStatus.NOT_FOUND, e.getMessage()));
     }
 
     @ExceptionHandler(PasswordInvalidException.class)
     public ResponseEntity<ErrorMessage> passwordInvalidException(RuntimeException e, HttpServletRequest request) {
 
-      log.error("Api error: ", e);
-      return ResponseEntity
-              .status(HttpStatus.BAD_REQUEST)
-              .contentType(MediaType.APPLICATION_JSON)
-              .body(new ErrorMessage(request, HttpStatus.BAD_REQUEST, e.getMessage()));
+        log.error("Api error: ", e);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErrorMessage(request, HttpStatus.BAD_REQUEST, e.getMessage()));
     }
 
     @ExceptionHandler(UsernameUniqueViolationException.class)
     public ResponseEntity<ErrorMessage> methodArgumentNotValidException(RuntimeException e, HttpServletRequest request) {
 
-      log.error("Api error: ", e);
-      return ResponseEntity
-              .status(HttpStatus.CONFLICT)
-              .contentType(MediaType.APPLICATION_JSON)
-              .body(new ErrorMessage(request, HttpStatus.CONFLICT, e.getMessage()));
+        log.error("Api error: ", e);
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErrorMessage(request, HttpStatus.CONFLICT, e.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -52,10 +52,10 @@ public class ApiExceptionHandler {
                                                                         HttpServletRequest request,
                                                                         BindingResult result) {
 
-      log.error("Api error: ", e);
-      return ResponseEntity
-              .status(HttpStatus.UNPROCESSABLE_ENTITY)
-              .contentType(MediaType.APPLICATION_JSON)
-              .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_ENTITY, "Invalid fields", result));
+        log.error("Api error: ", e);
+        return ResponseEntity
+                .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_ENTITY, "Invalid fields", result));
     }
 }

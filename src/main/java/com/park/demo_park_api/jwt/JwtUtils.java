@@ -23,7 +23,8 @@ public class JwtUtils {
     public static final long EXPIRE_HOURS = 0;
     public static final long EXPIRE_MINUTES = 2;
 
-    private JwtUtils() {}
+    private JwtUtils() {
+    }
 
     private static Key generateKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
@@ -56,8 +57,7 @@ public class JwtUtils {
             return Jwts.parserBuilder()
                     .setSigningKey(generateKey()).build()
                     .parseClaimsJws(refactorToken(token)).getBody();
-        }
-        catch (JwtException e) {
+        } catch (JwtException e) {
             log.error(String.format("Invalid token %s", e.getMessage()));
         }
         return null;
@@ -70,11 +70,10 @@ public class JwtUtils {
     public static boolean isTokenValid(String token) {
         try {
             Jwts.parserBuilder()
-                .setSigningKey(generateKey()).build()
-                .parseClaimsJws(refactorToken(token));
+                    .setSigningKey(generateKey()).build()
+                    .parseClaimsJws(refactorToken(token));
             return true;
-        }
-        catch (JwtException e) {
+        } catch (JwtException e) {
             log.error(String.format("Invalid token %s", e.getMessage()));
         }
         return false;
@@ -83,9 +82,7 @@ public class JwtUtils {
     private static String refactorToken(String token) {
         if (token.contains(JWT_BEARER)) {
             return token.substring(JWT_BEARER.length());
-        }
-        else
-        {
+        } else {
             return token;
         }
     }

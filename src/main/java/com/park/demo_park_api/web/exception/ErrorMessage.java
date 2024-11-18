@@ -1,6 +1,5 @@
 package com.park.demo_park_api.web.exception;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.*;
@@ -24,26 +23,26 @@ public class ErrorMessage {
     private Map<String, String> errors;
 
     public ErrorMessage(HttpServletRequest request, HttpStatus status, String message) {
-      this.path = request.getRequestURI();
-      this.method = request.getMethod();
-      this.status = status.value();
-      this.statusText = status.getReasonPhrase();
-      this.message = message;
+        this.path = request.getRequestURI();
+        this.method = request.getMethod();
+        this.status = status.value();
+        this.statusText = status.getReasonPhrase();
+        this.message = message;
     }
 
-  public ErrorMessage(HttpServletRequest request, HttpStatus status, String message, BindingResult result) {
-    this.path = request.getRequestURI();
-    this.method = request.getMethod();
-    this.status = status.value();
-    this.statusText = status.getReasonPhrase();
-    this.message = message;
-    addErrors(result);
-  }
+    public ErrorMessage(HttpServletRequest request, HttpStatus status, String message, BindingResult result) {
+        this.path = request.getRequestURI();
+        this.method = request.getMethod();
+        this.status = status.value();
+        this.statusText = status.getReasonPhrase();
+        this.message = message;
+        addErrors(result);
+    }
 
-  private void addErrors(BindingResult result) {
-      this.errors = new HashMap<>();
-      for (FieldError error : result.getFieldErrors()) {
-        this.errors.put(error.getField(), error.getDefaultMessage());
-      }
-  }
+    private void addErrors(BindingResult result) {
+        this.errors = new HashMap<>();
+        for (FieldError error : result.getFieldErrors()) {
+            this.errors.put(error.getField(), error.getDefaultMessage());
+        }
+    }
 }

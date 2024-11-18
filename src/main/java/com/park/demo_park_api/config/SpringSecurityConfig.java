@@ -1,7 +1,5 @@
 package com.park.demo_park_api.config;
 
-import com.park.demo_park_api.exception.PasswordInvalidException;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

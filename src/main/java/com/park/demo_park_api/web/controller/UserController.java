@@ -30,12 +30,12 @@ public class UserController {
 
     @Operation(summary = "Create a new user", description = "Resource to create a new user",
             responses = {
-                @ApiResponse(responseCode = "201", description = "Resource created successfully",
-                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class))),
-                @ApiResponse(responseCode = "409", description = "Email already registered in the system",
-                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
-                @ApiResponse(responseCode = "422", description = "Resource not processed due to invalid input data",
-                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
+                    @ApiResponse(responseCode = "201", description = "Resource created successfully",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class))),
+                    @ApiResponse(responseCode = "409", description = "Email already registered in the system",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
+                    @ApiResponse(responseCode = "422", description = "Resource not processed due to invalid input data",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PostMapping
     public ResponseEntity<UserResponseDTO> insert(@Valid @RequestBody UserCreateDTO userDTO) {
