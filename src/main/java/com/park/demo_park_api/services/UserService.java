@@ -1,9 +1,11 @@
 package com.park.demo_park_api.services;
 
 import com.park.demo_park_api.entities.User;
+import com.park.demo_park_api.exception.UsernameUniqueViolationException;
 import com.park.demo_park_api.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +18,12 @@ public class UserService {
 
     @Transactional
     public User insert(User user) {
-        return userRepository.save(user);
+        try {
+            return userRepository.save(user);
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new UsernameUniqueViolationException(String.format("Username {%s} ja cadastrado", user.getUsername()));
+        }
     }
 
     @Transactional
