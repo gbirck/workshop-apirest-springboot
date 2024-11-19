@@ -41,6 +41,10 @@ public class User implements Serializable {
     @Column(name = "modified_by")
     private String modifiedBy;
 
+    public enum Role {
+        ROLE_ADMIN, ROLE_CLIENT
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

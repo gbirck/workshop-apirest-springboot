@@ -42,6 +42,11 @@ public class UserService {
     }
 
     @Transactional
+    public User.Role findRoleByUsername(String username) {
+        return userRepository.findRoleByUsername(username);
+    }
+
+    @Transactional
     public List<User> findAll() {
         return userRepository.findAll();
     }
