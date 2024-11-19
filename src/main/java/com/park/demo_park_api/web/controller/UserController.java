@@ -8,6 +8,7 @@ import com.park.demo_park_api.web.dto.UserResponseDTO;
 import com.park.demo_park_api.web.dto.mapper.UserMapper;
 import com.park.demo_park_api.web.exception.ErrorMessage;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -50,18 +51,18 @@ public class UserController {
                     @ApiResponse(responseCode = "404", description = "Resource not found",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
+
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> findById(@PathVariable Long id) {
         User userTest = userService.findById(id);
         return ResponseEntity.ok(UserMapper.toDTO(userTest));
     }
 
-    @Operation(summary = "Search all users", description = "Resource to search all users",
+    @Operation(summary = "Search all users", description = "Resource to search all registered users",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Resource search completed successfully",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class))),
-                    @ApiResponse(responseCode = "404", description = "Resource not found",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
+                            content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserResponseDTO.class))))
             })
     @GetMapping
     public ResponseEntity<List<UserResponseDTO>> findAll() {

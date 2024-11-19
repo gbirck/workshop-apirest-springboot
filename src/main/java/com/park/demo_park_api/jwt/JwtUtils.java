@@ -17,8 +17,8 @@ import java.util.Date;
 public class JwtUtils {
 
     public static final String JWT_BEARER = "Bearer ";
-    public static final String JWT_AUTHORIZATION = "Authorization ";
-    public static final String SECRET_KEY = "0123456789-012345679-0123456789abcdef";
+    public static final String JWT_AUTHORIZATION = "Authorization";
+    public static final String SECRET_KEY = "0123456789-0123456789-0123456789";
     public static final long EXPIRE_DAYS = 0;
     public static final long EXPIRE_HOURS = 0;
     public static final long EXPIRE_MINUTES = 2;
@@ -52,7 +52,7 @@ public class JwtUtils {
         return new JwtToken(token);
     }
 
-    private static Claims getClaimsForToken(String token) {
+    private static Claims getClaimsFromToken(String token) {
         try {
             return Jwts.parserBuilder()
                     .setSigningKey(generateKey()).build()
@@ -64,7 +64,7 @@ public class JwtUtils {
     }
 
     public static String getUsernameFromToken(String token) {
-        return getClaimsForToken(token).getSubject();
+        return getClaimsFromToken(token).getSubject();
     }
 
     public static boolean isTokenValid(String token) {
@@ -82,8 +82,7 @@ public class JwtUtils {
     private static String refactorToken(String token) {
         if (token.contains(JWT_BEARER)) {
             return token.substring(JWT_BEARER.length());
-        } else {
-            return token;
         }
+        return token;
     }
 }
