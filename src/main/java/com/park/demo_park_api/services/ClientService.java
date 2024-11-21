@@ -8,8 +8,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class ClientService {
 
     private final ClientRepository clientRepository;
@@ -17,7 +17,7 @@ public class ClientService {
     @Transactional
     public Client insert(Client client) {
         try {
-            return clientRepository.insert(client);
+            return clientRepository.save(client);
         } catch (DataIntegrityViolationException e) {
             throw new CpfUniqueViolationException(
                     String.format("CPF %s already exists", client.getCpf())

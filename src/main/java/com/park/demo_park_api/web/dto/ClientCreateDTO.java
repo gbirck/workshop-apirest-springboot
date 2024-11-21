@@ -19,6 +19,6 @@ public class ClientCreateDTO {
     private String name;
 
     @Size(min = 11, max = 11)
-    @CPF
+    @CPF(message = "Invalid cpf format")
     private String cpf;
 }
