@@ -41,6 +41,7 @@ public class UserController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UserResponseDTO> insert(@Valid @RequestBody UserCreateDTO userDTO) {
         User userTest = userService.insert(UserMapper.toUser(userDTO));
         return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.toDTO(userTest));
@@ -68,6 +69,7 @@ public class UserController {
                             array = @ArraySchema(schema = @Schema(implementation = UserResponseDTO.class))))
             })
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UserResponseDTO>> findAll() {
         List<User> users = userService.findAll();
         return ResponseEntity.ok(UserMapper.toListDTO(users));
@@ -83,6 +85,7 @@ public class UserController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PatchMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT') AND #id == authentication.principal.id")
     public ResponseEntity<Void> updatePassword(@PathVariable Long id, @Valid @RequestBody UserPasswordDTO passwordDTO) {
         userService.updatePassword(id, passwordDTO.getCurrentPassword(), passwordDTO.getNewPassword(), passwordDTO.getConfirmPassword());
         return ResponseEntity.noContent().build();
