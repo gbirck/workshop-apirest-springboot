@@ -1,4 +1,4 @@
-package com.mballem.demoparkapi;
+package com.park.demo_park_api;
 import com.park.demo_park_api.jwt.JwtToken;
 import com.park.demo_park_api.web.dto.UserLoginDTO;
 import org.springframework.http.HttpHeaders;

@@ -1,4 +1,4 @@
-package com.mballem.demoparkapi;
+package com.park.demo_park_api;
 
 import com.park.demo_park_api.web.dto.UserCreateDTO;
 import com.park.demo_park_api.web.dto.UserPasswordDTO;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(scripts = "/sql/users/users-insert.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(scripts = "/sql/user/users-delete.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@Sql(scripts = "/sql/users/users-delete.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class UserIT {
 
     @Autowired
@@ -167,7 +167,7 @@ public class UserIT {
         org.assertj.core.api.Assertions.assertThat(responseBody).isNotNull();
         org.assertj.core.api.Assertions.assertThat(responseBody.getId()).isEqualTo(101);
         org.assertj.core.api.Assertions.assertThat(responseBody.getUsername()).isEqualTo("bia@email.com");
-        org.assertj.core.api.Assertions.assertThat(responseBody.getRole()).isEqualTo("CLIENTE");
+        org.assertj.core.api.Assertions.assertThat(responseBody.getRole()).isEqualTo("CLIENT");
 
         responseBody = testClient
                 .get()
@@ -181,7 +181,7 @@ public class UserIT {
         org.assertj.core.api.Assertions.assertThat(responseBody).isNotNull();
         org.assertj.core.api.Assertions.assertThat(responseBody.getId()).isEqualTo(101);
         org.assertj.core.api.Assertions.assertThat(responseBody.getUsername()).isEqualTo("bia@email.com");
-        org.assertj.core.api.Assertions.assertThat(responseBody.getRole()).isEqualTo("CLIENTE");
+        org.assertj.core.api.Assertions.assertThat(responseBody.getRole()).isEqualTo("CLIENT");
     }
 
     @Test
