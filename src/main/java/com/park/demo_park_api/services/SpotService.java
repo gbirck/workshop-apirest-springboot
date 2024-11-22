@@ -19,7 +19,7 @@ public class SpotService {
     public Spot insert(Spot spot) {
         try {
             return spotRepository.save(spot);
-        } catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException ex) {
             throw new CodeUniqueViolationException(
                     String.format("Spot with code %s already registered", spot.getCode())
             );
