@@ -127,7 +127,7 @@ public class ClientController {
                                     schema = @Schema(implementation = ErrorMessage.class))
                     )
             })
-    @GetMapping("/detalhes")
+    @GetMapping("/details")
     @PreAuthorize("hasRole('CLIENT')")
     public ResponseEntity<ClientResponseDTO> getDetails(@AuthenticationPrincipal JwtUserDetails userDetails) {
         Client client = clientService.findByUserId(userDetails.getId());

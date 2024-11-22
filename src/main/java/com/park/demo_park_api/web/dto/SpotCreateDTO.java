@@ -2,6 +2,7 @@ package com.park.demo_park_api.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,13 +14,13 @@ import org.hibernate.validator.constraints.br.CPF;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientCreateDTO {
+public class SpotCreateDTO {
 
     @NotBlank
-    @Size(min = 5, max = 100)
-    private String name;
+    @Size(min = 4, max = 4)
+    private String code;
 
-    @Size(min = 11, max = 11)
-    @CPF(message = "Invalid cpf format")
-    private String cpf;
+    @NotBlank
+    @Pattern(regexp = "FREE|OCUPIED")
+    private String status;
 }
