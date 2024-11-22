@@ -15,6 +15,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "clients")
 @EntityListeners(AuditingEntityListener.class)
@@ -23,13 +24,10 @@ public class Client implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "name", nullable = false, length = 100)
     private String name;
-
-    @Column(name = "cpf", nullable = false, length = 11, unique = true)
+    @Column(name = "cpf", nullable = false, unique = true, length = 11)
     private String cpf;
-
     @OneToOne
     @JoinColumn(name = "id_user", nullable = false)
     private User user;
@@ -37,15 +35,12 @@ public class Client implements Serializable {
     @CreatedDate
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
-
     @LastModifiedDate
     @Column(name = "modification_date")
     private LocalDateTime modificationDate;
-
     @CreatedBy
     @Column(name = "created_by")
     private String createdBy;
-
     @LastModifiedBy
     @Column(name = "modified_by")
     private String modifiedBy;

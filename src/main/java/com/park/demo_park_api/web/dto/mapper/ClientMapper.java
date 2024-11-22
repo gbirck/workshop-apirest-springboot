@@ -11,11 +11,11 @@ import org.modelmapper.ModelMapper;
 
 public class ClientMapper {
 
-    public static Client toClient(ClientCreateDTO clientDto) {
-        return new ModelMapper().map(clientDto, Client.class);
+    public static Client toClient(ClientCreateDTO dto) {
+        return new ModelMapper().map(dto, Client.class);
     }
 
-    public static ClientResponseDTO toDto(Client client) {
+    public static ClientResponseDTO toDTO(Client client) {
         return new ModelMapper().map(client, ClientResponseDTO.class);
     }
 }

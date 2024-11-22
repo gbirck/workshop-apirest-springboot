@@ -36,11 +36,11 @@ public class AuthenticationController {
 
     @Operation(summary = "Authenticate in API", description = "Resource to authenticate in API",
             responses = {
-                    @ApiResponse(responseCode = "201", description = "Authentication completed successfully",
+                    @ApiResponse(responseCode = "200", description = "Authentication completed successfully",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class))),
                     @ApiResponse(responseCode = "400", description = "Invalid credentials",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
-                    @ApiResponse(responseCode = "422", description = "Invalid Fields",
+                    @ApiResponse(responseCode = "422", description = "Invalid fields",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
 
@@ -58,7 +58,7 @@ public class AuthenticationController {
             return ResponseEntity.ok(token);
 
         } catch (AuthenticationException e) {
-            log.warn("Bad Credentials from username {}", loginDto.getUsername());
+            log.warn("Bad Credentials from username '{}'", loginDto.getUsername());
         }
         return ResponseEntity
                 .badRequest()
