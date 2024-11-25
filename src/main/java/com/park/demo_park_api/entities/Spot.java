@@ -35,7 +35,7 @@ public class Spot implements Serializable {
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private StatusVaga statusVaga;
+    private StatusSpot statusSpot;
 
     @CreatedDate
     @Column(name = "creation_date")
@@ -53,8 +53,8 @@ public class Spot implements Serializable {
     @Column(name = "modified_by")
     private String modifiedBy;
 
-    public enum StatusVaga {
-        FREE, OCUPIED
+    public enum StatusSpot {
+        FREE, OCCUPIED
     }
 
     @Override

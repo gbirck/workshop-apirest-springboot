@@ -66,7 +66,7 @@ public class SpotController {
                     @ApiResponse(responseCode = "200", description = "Resource created successfully",
                             content = @Content(mediaType = " application/json;charset=UTF-8",
                                     schema = @Schema(implementation = SpotResponseDTO.class))),
-                    @ApiResponse(responseCode = "404", description = "Spot not finded",
+                    @ApiResponse(responseCode = "404", description = "Spot not found",
                             content = @Content(mediaType = " application/json;charset=UTF-8",
                                     schema = @Schema(implementation = ErrorMessage.class))),
                     @ApiResponse(responseCode = "403", description = "Resource not allowed in the CLIENT profile",

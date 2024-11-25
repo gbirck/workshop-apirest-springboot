@@ -127,7 +127,7 @@ public class SpotIT {
                 .uri("/api/v1/spots")
                 .contentType(MediaType.APPLICATION_JSON)
                 .headers(JwtAuthentication.getHeaderAuthorization(testClient, "bia@email.com", "123456"))
-                .bodyValue(new SpotCreateDTO("A-05", "OCUPIED"))
+                .bodyValue(new SpotCreateDTO("A-05", "OCCUPIED"))
                 .exchange()
                 .expectStatus().isForbidden()
                 .expectBody()

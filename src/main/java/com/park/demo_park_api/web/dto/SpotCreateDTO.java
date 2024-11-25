@@ -19,6 +19,6 @@ public class SpotCreateDTO {
     private String code;
 
     @NotBlank
-    @Pattern(regexp = "FREE|OCUPIED")
+    @Pattern(regexp = "FREE|OCCUPIED")
     private String status;
 }

@@ -4,5 +4,5 @@ insert into USERS (id, username, password, role) values (102, 'bob@email.com', '
 
 insert into SPOTS (id, code, status) values (10, 'A-01', 'FREE');
 insert into SPOTS (id, code, status) values (20, 'A-02', 'FREE');
-insert into SPOTS (id, code, status) values (30, 'A-03', 'OCUPIED');
+insert into SPOTS (id, code, status) values (30, 'A-03', 'OCCUPIED');
 insert into SPOTS (id, code, status) values (40, 'A-04', 'FREE');
