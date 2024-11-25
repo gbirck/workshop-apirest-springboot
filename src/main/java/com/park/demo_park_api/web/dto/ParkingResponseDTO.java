@@ -28,7 +28,7 @@ public class ParkingResponseDTO {
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDateTime exitDate;
     private String spotCode;
-    private BigDecimal price;
+    private BigDecimal value;
     private BigDecimal discount;
 
 }
