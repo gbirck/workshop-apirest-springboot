@@ -17,7 +17,7 @@ import org.springframework.security.access.AccessDeniedException;
 public class ApiExceptionHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<ErrorMessage> acessDeniedException(AccessDeniedException e, HttpServletRequest request) {
+    public ResponseEntity<ErrorMessage> accessDeniedException(AccessDeniedException e, HttpServletRequest request) {
 
         log.error("Api error: ", e);
         return ResponseEntity

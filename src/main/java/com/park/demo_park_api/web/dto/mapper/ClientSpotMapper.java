@@ -14,7 +14,7 @@ public class ClientSpotMapper {
         return new ModelMapper().map(parkingCreateDTO, ClientSpot.class);
     }
 
-    public static ParkingResponseDTO toParkingCreateDTO(ClientSpot clientSpot) {
+    public static ParkingResponseDTO toDTO(ClientSpot clientSpot) {
         return new ModelMapper().map(clientSpot, ParkingResponseDTO.class);
     }
 }
