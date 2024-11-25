@@ -29,7 +29,7 @@ public class Client implements Serializable {
     @Column(name = "cpf", nullable = false, unique = true, length = 11)
     private String cpf;
     @OneToOne
-    @JoinColumn(name = "id_user", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @CreatedDate

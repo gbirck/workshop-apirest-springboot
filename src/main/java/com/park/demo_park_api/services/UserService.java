@@ -55,7 +55,7 @@ public class UserService {
     }
 
     @Transactional
-    public User updatePassword(Long id, String currentPassword, String newPassword, String confirmPassword) {
+    public void updatePassword(Long id, String currentPassword, String newPassword, String confirmPassword) {
         if (!newPassword.equals(confirmPassword)) {
             throw new PasswordInvalidException("Passwords do not match");
         }
@@ -66,6 +66,5 @@ public class UserService {
         }
 
         user.setPassword(passwordEncoder.encode(newPassword));
-        return user;
     }
 }
