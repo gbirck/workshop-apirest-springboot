@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ClientSpotRepository extends JpaRepository<ClientSpot, Long> {
     Optional<ClientSpot> findByReceipt(String receipt);
 
-    long getTotalTimesParkingCompleteByClientCpf(String cpf);
+    long countByClientCpfAndExitDateIsNotNull(String cpf);
 
     Page<ClientSpotProjection> findAllByClientCpf(String cpf, Pageable pageable);
 

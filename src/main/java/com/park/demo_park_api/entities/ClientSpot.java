@@ -11,7 +11,6 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -23,15 +22,13 @@ import java.util.Objects;
 @Entity
 @Table(name = "clients_spots")
 @EntityListeners(AuditingEntityListener.class)
-public class ClientSpot implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class ClientSpot {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name= "receipt_number", nullable = false, unique = true, length = 15)
+    @Column(name= "receipt", nullable = false, unique = true, length = 15)
     private String receipt;
 
     @Column(name = "plate", nullable = false, length = 8)

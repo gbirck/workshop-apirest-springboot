@@ -38,7 +38,7 @@ import java.net.URI;
 import static io.swagger.v3.oas.annotations.enums.ParameterIn.PATH;
 import static io.swagger.v3.oas.annotations.enums.ParameterIn.QUERY;
 
-@Tag(name = "Park", description = "Operations for registering a vehicle in and out of the parking lot.")
+@Tag(name = "Parking", description = "Operations for registering a vehicle in and out of the parking lot.")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("api/v1/parking")

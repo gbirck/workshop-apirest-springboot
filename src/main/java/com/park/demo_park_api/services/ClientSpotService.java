@@ -21,6 +21,7 @@ public class ClientSpotService {
         return clientSpotRepository.save(clientSpot);
     }
 
+    @Transactional(readOnly = true)
     public ClientSpot findByReceipt(String receipt) {
         return clientSpotRepository.findByReceipt(receipt).orElseThrow(
                 () -> new EntityNotFoundException(
@@ -31,13 +32,15 @@ public class ClientSpotService {
 
     @Transactional(readOnly = true)
     public long getTotalTimesParkingCompleteByClientCpf(String cpf) {
-        return clientSpotRepository.getTotalTimesParkingCompleteByClientCpf(cpf);
+        return clientSpotRepository.countByClientCpfAndExitDateIsNotNull(cpf);
     }
 
+    @Transactional(readOnly = true)
     public Page<ClientSpotProjection> findAllByClientCpf(String cpf, Pageable pageable) {
         return clientSpotRepository.findAllByClientCpf(cpf, pageable);
     }
 
+    @Transactional(readOnly = true)
     public Page<ClientSpotProjection> findAllClientParkingByUserId(Long id, Pageable pageable) {
         return clientSpotRepository.findAllByClientUserId(id, pageable);
     }
